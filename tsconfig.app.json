@@ -32,5 +32,7 @@
       "@widgets": ["widgets/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src",
+    "src/global.d.ts"],
+  "exclude": ["node_modules"]
 }

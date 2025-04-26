@@ -1,8 +1,8 @@
-import { LoginForm } from '@/features';
-import styles from './loginPage.module.scss';
+import { RegisterForm } from '@/features';
+import styles from './registerPage.module.scss';
 import { Logo } from '@/shared/component';
 
-export default function LoginPage() {
+export default function RegisterPage() {
   return (
     <div className={styles.page}>
       <div className="container">
@@ -10,7 +10,7 @@ export default function LoginPage() {
           <div className={styles.text}>
             <Logo />
           </div>
-          <LoginForm />
+          <RegisterForm />
         </div>
       </div>
     </div>

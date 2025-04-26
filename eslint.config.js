@@ -1,3 +1,6 @@
+
+
+
 import js from '@eslint/js';
 import globals from 'globals';
 import tsParser from '@typescript-eslint/parser';
@@ -9,17 +12,16 @@ import prettier from 'eslint-config-prettier';
 import { fixupPluginRules } from '@eslint/compat';
 
 export default [
-  // Базовые правила ESLint
   js.configs.recommended,
 
-  // Настройки для TypeScript
   {
     files: ['**/*.{ts,tsx}'],
+    ignores: ['**/*.config.ts'],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
         ecmaFeatures: { jsx: true },
-        project: './tsconfig.json',
+        project: './tsconfig.app.json',
       },
     },
     plugins: {
@@ -65,19 +67,17 @@ export default [
     },
   },
 
-  // Интеграция с Prettier
+  prettier,
+  
   {
-    plugins: {
-      prettier,
-    },
-    rules: {
-      ...prettier.rules,
-      'prettier/prettier': 'error',
-    },
-  },
-
-  // Игнорируемые файлы
-  {
-    ignores: ['**/node_modules', '**/dist', '**/build', '**/*.config.js', '**/*.d.ts'],
+    ignores: [
+      '**/node_modules',
+      '**/dist',
+      '**/build',
+      '**/*.config.js',
+      '**/*.config.ts',
+      'vite.config.ts',
+      '**/*.d.ts',
+    ],
   },
 ];
