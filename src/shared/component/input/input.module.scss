@@ -1,0 +1,37 @@
+.label {
+  font-weight: 600;
+  font-size: 16px;
+  color: #7b7b80;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.base {
+  border: 1px solid #7b7b80;
+  border-radius: 8px;
+  width: 100%;
+  padding: 7px 10px;
+
+  input {
+    font-size: 16px;
+  }
+}
+
+.error {
+  color: red;
+  font-size: 10px;
+  animation: show 0.5s;
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
