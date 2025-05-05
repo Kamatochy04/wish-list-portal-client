@@ -39,9 +39,15 @@ export function RegisterForm() {
       <p className={styles.form__way}>Registed with:</p>
 
       <div className={styles.form__way_container}>
-        <MediaTab children={<GoogleIcon />} text={'Google'} />
-        <MediaTab children={<FacebookIcon />} text={'Facebook'} />
-        <MediaTab children={<TwitterIcon />} text={'Twitter'} />
+        <MediaTab text={'Google'}>
+          <GoogleIcon />
+        </MediaTab>
+        <MediaTab text={'Facebook'}>
+          <FacebookIcon />
+        </MediaTab>
+        <MediaTab text={'Twitter'}>
+          <TwitterIcon />
+        </MediaTab>
       </div>
 
       <div className={styles.form__separator}>
@@ -51,11 +57,17 @@ export function RegisterForm() {
       <div className={styles.form__container}>
         <Input labelText="Name" {...register('name')} erroText={errors.name?.message} />
         <Input labelText="Email" {...register('email')} erroText={errors.email?.message} />
-        <Input labelText="Password" {...register('password')} erroText={errors.password?.message} />
+        <Input
+          labelText="Password"
+          {...register('password')}
+          erroText={errors.password?.message}
+          type="password"
+        />
         <Input
           labelText="Repeat password "
           {...register('repeat_password')}
           erroText={errors.repeat_password?.message}
+          type="password"
         />
         <span className={styles.form__footer}>
           <p>

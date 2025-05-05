@@ -5,4 +5,29 @@
   text-align: center;
   color: #000;
   background: var(--main-color);
+  cursor: pointer;
+  transition: all 0.3s;
+  &:hover {
+    box-shadow: 0 0 15px rgb(225, 135, 135);
+  }
+}
+
+.primary {
+  background: #c4c4c4;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  gap: 5px;
+  border-radius: 10px;
+
+  font-weight: 700;
+  font-size: 12px;
+  color: #000;
+  cursor: pointer;
+  transition: all 0.4s;
+  &:hover {
+    background: #8f8f8f;
+  }
 }

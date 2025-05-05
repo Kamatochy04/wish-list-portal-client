@@ -6,10 +6,15 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
     children: ReactNode;
     className?: string;
     isLoading?: boolean;
+    // eslint-disable-next-line no-undef
+    leftIcon?: React.ReactNode;
   };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, isLoading = false, children, disabled, ...props }, ref) => {
+  (
+    { leftIcon, className, variant, size, isLoading = false, children, disabled, ...props },
+    ref,
+  ) => {
     return (
       <button
         ref={ref}
@@ -17,6 +22,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={disabled || isLoading}
         {...props}
       >
+        {leftIcon ? leftIcon : null}
+
         {isLoading ? <span className="mr-2">Загрузка...</span> : null}
         {children}
       </button>
@@ -26,6 +33,5 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
 Button.displayName = 'Button';
 
-// Экспортируем типы для использования в других компонентах
 export type { ButtonProps };
 export { buttonVariants };

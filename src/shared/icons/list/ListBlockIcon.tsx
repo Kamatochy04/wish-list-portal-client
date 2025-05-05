@@ -1,0 +1,39 @@
+export const ListBlockIcon = () => {
+  return (
+    <svg width="30" height="28" viewBox="0 0 30 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect
+        x="0.954545"
+        y="0.954545"
+        width="12.0909"
+        height="11.0909"
+        rx="1.59091"
+        strokeWidth="1.90909"
+      />
+      <rect
+        x="16.9545"
+        y="15.9545"
+        width="12.0909"
+        height="11.0909"
+        rx="1.59091"
+        strokeWidth="1.90909"
+      />
+      <rect
+        x="0.954545"
+        y="15.9545"
+        width="12.0909"
+        height="11.0909"
+        rx="1.59091"
+        strokeWidth="1.90909"
+      />
+      <rect
+        x="16.9545"
+        y="0.954545"
+        width="12.0909"
+        height="11.0909"
+        rx="1.59091"
+        stroke="black"
+        strokeWidth="1.90909"
+      />
+    </svg>
+  );
+};
