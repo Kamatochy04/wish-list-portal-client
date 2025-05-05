@@ -1,0 +1,92 @@
+.table {
+  &_header {
+    margin-top: 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__block {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .text {
+      font-weight: 400;
+      font-size: 18px;
+      color: #000;
+    }
+  }
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.add_button {
+  padding: 10px 30px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
+  background: #e6e6e6;
+  font-weight: 600;
+  font-size: 20px;
+  text-align: center;
+  color: #1d1d1d;
+
+  border: 1px solid #000;
+  border-radius: 8px;
+  &:hover {
+    background: #e6e6e6d2;
+    box-shadow: none;
+  }
+}
+
+.icon {
+  cursor: pointer;
+  svg {
+    path {
+      fill: rgb(109, 109, 109);
+    }
+  }
+  rect {
+    stroke: rgb(109, 109, 109);
+  }
+}
+
+.plus {
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 30%;
+  color: #1d1d1d;
+}
+
+.block {
+  margin-top: 19px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 19px;
+}
+
+.icon_active {
+  svg {
+    path {
+      fill: rgb(0, 0, 0);
+    }
+    rect {
+      stroke: rgb(0, 0, 0);
+    }
+  }
+}
+
+.header {
+  display: flex;
+  gap: 35px;
+  margin-top: 60px;
+}

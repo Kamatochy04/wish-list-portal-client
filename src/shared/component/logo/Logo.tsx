@@ -1,5 +1,4 @@
 import { forwardRef } from 'react';
-// import styles from './logo.module.scss';
 import { LogoVariant, logoVariant } from './logoVariants';
 
 interface LogoProps extends LogoVariant {
@@ -13,3 +12,5 @@ export const Logo = forwardRef<HTMLParagraphElement, LogoProps>(({ className, si
     </p>
   );
 });
+
+Logo.displayName = 'Logo';

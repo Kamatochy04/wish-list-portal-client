@@ -1,20 +1,19 @@
 .page {
-  background-image: url('../../../shared/img/RegisterBg.png');
+  background-image: url('../../../shared/img/LoginBg.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: end;
+
   &__container {
     display: flex;
-
+    height: 100vh;
     justify-content: space-between;
+    align-items: flex-start;
+    align-items: center;
   }
 }
 
 .text {
-  height: 100%;
-  margin-top: 170px;
+  margin-top: -170px;
+  margin-left: 200px;
 }
