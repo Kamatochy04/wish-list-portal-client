@@ -2,10 +2,27 @@
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   background: #fff;
   padding: 10px 0;
+  position: relative;
+  transition: background 0.3s ease;
+
   &__container {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    transition: all 0.3s ease;
+  }
+}
+
+.auth__content {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  @media (max-width: 768px) {
+    padding: 50px 0 0 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
   }
 }
 
@@ -22,6 +39,140 @@
     cursor: pointer;
     &:hover {
       color: var(--main-color);
+      transform: scale(1.05);
     }
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    padding: 1rem;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    height: 100vh;
+    width: 250px;
+    box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+    transition:
+      left 0.5s ease,
+      opacity 0.5s ease;
+
+    &.non_auth__container_open {
+      display: flex;
+      left: 0;
+      opacity: 1;
+    }
+  }
+}
+
+.auth__container {
+  font-weight: 700;
+  font-size: 18px;
+  color: #000;
+
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  .userName {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .logout {
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
+    transition: color 0.3s ease;
+    &:hover {
+      color: var(--accent-color);
+    }
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    padding: 1rem;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    height: 100vh;
+    width: 250px;
+    box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+    transition:
+      left 0.5s ease,
+      opacity 0.5s ease;
+
+    &.auth__container_open {
+      display: flex;
+      left: 0;
+      opacity: 1;
+    }
+
+    .userName {
+      flex-direction: row;
+    }
+  }
+}
+
+.menuToggle {
+  display: none;
+  cursor: pointer;
+
+  span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: #000;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
+
+  @media (max-width: 768px) {
+    display: block;
+
+    &.open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    &.open span:nth-child(2) {
+      opacity: 0;
+    }
+    &.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+  }
+}
+
+.non_auth__container,
+.auth__container {
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+
+  &.non_auth__container_open,
+  &.auth__container_open {
+    opacity: 1;
+    animation: slideIn 0.5s ease forwards;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .header__container {
+    flex-direction: row;
+    align-items: center;
   }
 }

@@ -17,3 +17,14 @@
   margin-top: -170px;
   margin-left: 200px;
 }
+
+@media (max-width: 1045px) {
+  .text {
+    display: none;
+  }
+  .page__container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}

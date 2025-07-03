@@ -18,3 +18,5 @@ export { ListBlockIcon } from './list/ListBlockIcon';
 export { SendIcon } from './SendIcon';
 
 export { GiftIcon } from './gift/GiftIcon';
+
+export { OnLoadImg } from './onLoadImg';

@@ -1,0 +1,48 @@
+import { api } from '@/app/store/api';
+
+type Gift = {
+  id: number;
+  name: string;
+};
+
+export type Event = {
+  id: number;
+  title: string;
+  userId: number;
+  description?: string;
+  eventDate?: string;
+  imagePath?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  publicUrl: string | null;
+  publicUrlExpiration: string | null;
+  gifts: Gift[];
+};
+
+export type EventsResponse = Event[];
+
+export const eventApi = api.injectEndpoints({
+  endpoints: (builder) => ({
+    get: builder.query<EventsResponse, void>({
+      query: () => ({
+        url: '/events',
+        method: 'GET',
+      }),
+    }),
+    getOne: builder.query<Event, number>({
+      query: (id) => ({
+        url: `/events/${String(id)}`,
+        method: 'GET',
+      }),
+    }),
+    create: builder.mutation<Event, FormData>({
+      query: (formData) => ({
+        url: '/events',
+        method: 'POST',
+        body: formData,
+      }),
+    }),
+  }),
+});
+
+export const { useCreateMutation, useGetQuery, useGetOneQuery } = eventApi;

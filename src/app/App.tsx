@@ -3,10 +3,15 @@ import AppRouter from './route/Router';
 
 import './styles/index.scss';
 
+import { Provider } from 'react-redux';
+import { store } from './store/store';
+
 export function App() {
   return (
     <BrowserRouter>
-      <AppRouter />
+      <Provider store={store}>
+        <AppRouter />
+      </Provider>
     </BrowserRouter>
   );
 }

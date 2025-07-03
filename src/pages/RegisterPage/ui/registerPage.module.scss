@@ -16,3 +16,14 @@
 .text {
   margin-top: -170px;
 }
+
+@media (max-width: 790px) {
+  .text {
+    display: none;
+  }
+  .page__container {
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+}

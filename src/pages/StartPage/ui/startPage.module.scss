@@ -3,136 +3,173 @@
   padding: 63px 0 0 0;
   background-repeat: no-repeat;
   background-size: cover;
+
   &__container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 0 15px;
   }
 }
 
 .block {
   background: #fff;
   padding: 13px 30px 57px 30px;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 27px;
   width: 100%;
-
   border-radius: 10px;
+
   &__title {
     font-weight: 700;
     font-size: 20px;
     color: #000;
+    text-align: center;
   }
+
   &__container {
     width: 100%;
     display: flex;
-    align-items: start;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
   }
 }
 
 .inf_block {
   max-width: 230px;
   width: 100%;
+  text-align: center;
+
+  @media (min-width: 768px) {
+    text-align: left;
+  }
+
   &__header {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    gap: 10px;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      justify-content: flex-start;
+    }
   }
+
   &__text {
     font-weight: 700;
-    font-size: 20px;
+    font-size: 18px;
     color: #000;
+
+    @media (min-width: 768px) {
+      font-size: 20px;
+    }
   }
+
   &__descr {
     margin-top: 15px;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 14px;
     color: #7b7b80;
+
+    @media (min-width: 768px) {
+      font-size: 16px;
+    }
   }
 }
 
 .button {
-  padding: 22px 40px;
-
+  padding: 15px 30px;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 18px;
   color: #fff;
-
   border-radius: 6px;
-
   margin-top: 20px;
+  width: 100%;
+  max-width: 300px;
+
+  @media (min-width: 768px) {
+    padding: 22px 40px;
+    font-size: 24px;
+  }
 }
 
 .carusel {
-  margin-top: 10px;
+  margin-top: 30px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+
   &__title {
     font-weight: 700;
-    font-size: 36px;
+    font-size: 24px;
     color: #000;
+    margin-bottom: 20px;
+
+    @media (min-width: 768px) {
+      font-size: 36px;
+    }
   }
+
   &__container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    gap: 30px;
-
+    width: 100%;
     position: relative;
-  }
-}
-
-.icon {
-  &_left {
-    position: absolute;
-    left: -60px;
-    cursor: pointer;
-  }
-  &_right {
-    position: absolute;
-    right: -60px;
-    cursor: pointer;
-  }
-}
-
-.carusel {
-  &__container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    margin: 20px 0;
   }
 
   &__items {
     display: flex;
-    gap: 20px;
+    gap: 15px;
     width: 100%;
-    overflow: hidden;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 10px 0;
+
+    @media (min-width: 768px) {
+      justify-content: center;
+      overflow-x: hidden;
+    }
   }
 
-  .icon_left,
-  .icon_right {
+  &__arrow {
     background: none;
     border: none;
     cursor: pointer;
     padding: 10px;
     z-index: 1;
+    display: none;
+
+    @media (min-width: 768px) {
+      display: block;
+      position: static;
+      margin: 0 10px;
+    }
 
     &:hover {
       opacity: 0.7;
     }
   }
+}
 
-  .icon_left {
-    margin-right: 10px;
-  }
+// Hide scrollbar for carousel on mobile
+@media (max-width: 767px) {
+  .carusel__items {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 
-  .icon_right {
-    margin-left: 10px;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }

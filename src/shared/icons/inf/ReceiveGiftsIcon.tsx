@@ -8,7 +8,7 @@ export const ReceiveGiftsIcon = () => {
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <g clip-path="url(#clip0_3854_380)">
+      <g clipPath="url(#clip0_3854_380)">
         <path d="M55 0H0V56H55V0Z" fill="url(#pattern0_3854_380)" />
       </g>
       <defs>

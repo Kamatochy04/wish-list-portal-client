@@ -1,4 +1,4 @@
-import { DeleteIcon, EditIcon, GiftIcon } from '@/shared/icons';
+import { GiftIcon } from '@/shared/icons';
 import styles from './giftReserveCard.module.scss';
 import { FC } from 'react';
 
@@ -6,7 +6,7 @@ type GiftCardProps = {
   variant?: 'container' | 'block';
 };
 
-export const GiftReserveCard: FC<GiftCardProps> = ({ variant = 'container' }) => {
+export const GiftReserveCard: FC<GiftCardProps> = ({ variant = 'block' }) => {
   return (
     <div className={`${styles[variant]} ${styles.box}`}>
       <img

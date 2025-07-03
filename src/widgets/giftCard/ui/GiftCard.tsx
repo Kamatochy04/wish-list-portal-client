@@ -15,16 +15,16 @@ export const GiftCard: FC<GiftCardProps> = ({ variant = 'container' }) => {
         className={`${variant === 'block' ? styles.block_img : styles.container_img}`}
       />
       <div className={styles.text}>
-        <h4 className={` ${styles.text_line} ${styles.title}`}>
+        <h4 className={`${styles.text_line} ${styles.title}`}>
           Gift Title here
-          {variant == 'container' ? null : (
+          {variant === 'container' ? null : (
             <div className={styles.icons}>
-              <div className={styles.icon}>
+              <button className={styles.icon} aria-label="Delete gift">
                 <DeleteIcon />
-              </div>
-              <div className={styles.icon}>
+              </button>
+              <button className={styles.icon} aria-label="Edit gift">
                 <EditIcon />
-              </div>
+              </button>
             </div>
           )}
         </h4>
@@ -34,20 +34,20 @@ export const GiftCard: FC<GiftCardProps> = ({ variant = 'container' }) => {
         </p>
         <div className={styles.link}>
           <p>Link to shop</p>
-          {variant == 'container' ? null : <div className={styles.price}>10$</div>}
+          {variant === 'container' ? null : <div className={styles.price}>10$</div>}
         </div>
       </div>
 
-      {variant == 'block' ? null : (
+      {variant === 'block' ? null : (
         <div className={styles.inf}>
           <div className={styles.price}>10$</div>
           <div className={styles.icons}>
-            <div className={styles.icon}>
+            <button className={styles.icon} aria-label="Delete gift">
               <DeleteIcon />
-            </div>
-            <div className={styles.icon}>
+            </button>
+            <button className={styles.icon} aria-label="Edit gift">
               <EditIcon />
-            </div>
+            </button>
           </div>
         </div>
       )}

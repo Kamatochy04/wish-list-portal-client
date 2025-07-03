@@ -13,9 +13,6 @@ export const registerSchema = z
       .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
       .regex(/[0-9]/, 'Password must contain at least one number'),
     repeat_password: z.string(),
-    terms: z.boolean().refine((val) => val, {
-      message: 'You must accept the terms of service',
-    }),
   })
   .refine((data) => data.password === data.repeat_password, {
     message: "Passwords don't match",

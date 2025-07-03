@@ -4,3 +4,4 @@ export { StartPage } from './StartPage/index';
 export { GiftPage } from './GiftPage/index';
 export { AccauntInfo } from './AccauntInfoPage/index';
 export { EventPage } from './EventPage/index';
+export { NotFoundPage } from './404/index';

@@ -11,8 +11,10 @@ import { registerSchema } from '../schema/registerShame';
 import { useNavigate } from 'react-router-dom';
 
 import styles from './registerForm.module.scss';
+import { useRegisterMutation } from '../api/register.api';
 
 export function RegisterForm() {
+  const [registerUser] = useRegisterMutation();
   const {
     register,
     handleSubmit,
@@ -24,8 +26,20 @@ export function RegisterForm() {
 
   const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<IRegisterForm> = () => {
-    console.log(errors);
+  const onSubmit: SubmitHandler<IRegisterForm> = async (data) => {
+    try {
+      await registerUser({
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      })
+        .unwrap()
+        .then(console.log);
+
+      navigate('/main');
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -77,7 +91,9 @@ export function RegisterForm() {
         </span>
       </div>
 
-      <Button className={styles.button}>Register</Button>
+      <Button className={styles.button} type="submit">
+        Register
+      </Button>
     </form>
   );
 }
