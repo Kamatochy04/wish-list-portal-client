@@ -136,7 +136,6 @@
     transform: scale(1.05);
   }
 
-  /* Текст Browse image */
   &::before {
     content: 'Browse image';
   }
@@ -152,15 +151,11 @@
   }
 }
 
-/* Базовые стили формы с начальным состоянием (снизу, скрыта) */
-
-/* Состояние при появлении формы (поднимается вверх) */
 .form.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Элементы формы с задержкой появления */
 .form__block,
 .form__img {
   opacity: 0;
@@ -168,7 +163,6 @@
   transition: all 0.5s;
 }
 
-/* Анимация элементов после появления формы (с задержкой 0.2s) */
 .form.visible .form__block,
 .form.visible .form__img {
   opacity: 1;
@@ -176,7 +170,6 @@
   transition-delay: 0.2s;
 }
 
-/* Дополнительная задержка для вложенных элементов (входы, кнопки) */
 .form__header,
 .form__img_block,
 .button,
@@ -187,7 +180,29 @@
   transition: all 1s;
 }
 
-/* Появление вложенных элементов с разной задержкой */
+.datePickerContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  width: 100%;
+}
+
+.label {
+  font-weight: 600;
+  font-size: 16px;
+  color: #7b7b80;
+}
+
+.datePickerInput {
+  border: 1px solid #7b7b80;
+  border-radius: 8px;
+  width: 100%;
+  font-weight: 400;
+  font-size: 16px;
+  color: #000;
+  padding: 10px 8px;
+}
+
 .form.visible .form__header {
   opacity: 1;
   transform: translateY(0);

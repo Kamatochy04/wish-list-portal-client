@@ -4,9 +4,14 @@
   justify-content: space-between;
   p {
     font-weight: 400;
-    font-size: 16px;
+    font-size: 14px;
     color: #000;
   }
+}
+
+.data {
+  font-size: 18px;
+  font-weight: 500;
 }
 .icon {
   cursor: pointer;
@@ -77,15 +82,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-weight: 700;
-    font-size: 30px;
+    font-weight: 600;
+    font-size: 20px;
     color: #000;
     & .title {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-weight: 700;
-      font-size: 30px;
+      font-weight: 600;
+      font-size: 22px;
       color: #000;
       max-width: 400px;
       overflow: hidden;
@@ -95,8 +100,9 @@
   }
   &__descr {
     &Text {
-      font-weight: 700;
-      font-size: 20px;
+      font-weight: 600;
+      min-height: 50px;
+      font-size: 16px;
       color: #7b7b80;
     }
   }

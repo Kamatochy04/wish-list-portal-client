@@ -1,6 +1,17 @@
-export const EditIcon = () => {
+type Props = {
+  onClick: () => void;
+};
+
+export const EditIcon = ({ onClick }: Props) => {
   return (
-    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width="30"
+      height="30"
+      viewBox="0 0 30 30"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      onClick={onClick}
+    >
       <path
         d="M8.81055 21.2663L14.1311 21.2475L25.7439 9.3225C26.1996 8.85 26.4504 8.2225 26.4504 7.555C26.4504 6.8875 26.1996 6.26 25.7439 5.7875L23.8317 3.805C22.9202 2.86 21.33 2.865 20.4258 3.80125L8.81055 15.7288V21.2663V21.2663ZM22.1269 5.5725L24.0427 7.55125L22.1173 9.52875L20.2051 7.5475L22.1269 5.5725ZM11.2218 16.7713L18.4919 9.305L20.4041 11.2875L13.1352 18.7513L11.2218 18.7575V16.7713Z"
         fill="black"

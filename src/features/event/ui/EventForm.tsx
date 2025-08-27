@@ -1,18 +1,23 @@
-import { Button, DatePickerComponent, Input, TextArea } from '@/shared/component';
+// src/components/EventForm.tsx
+import { Button, CustomDatePicker, Input, TextArea } from '@/shared/component';
 import styles from './event.module.scss';
-import { OnLoadImg } from '@/shared/icons';
-import { useCreateMutation } from '../api/event.api';
 import { useState, ChangeEvent, FormEvent, FC, useEffect } from 'react';
 import { DeleteOutletIcon } from '@/shared/icons/DeleteoutletIcon';
 import { CopyLink } from '@/shared/icons/CopyLink';
 import { DeletePopup } from '@/widgets';
+import { useCreateEventMutation, useGetByIdQuery, useUpdateMutation } from '../api/event.api';
 
 type Props = {
   onClouse: () => void;
+  eventId?: number;
 };
 
-export const EventForm: FC<Props> = ({ onClouse }) => {
-  const [createEvent, { isLoading }] = useCreateMutation();
+export const EventForm: FC<Props> = ({ onClouse, eventId }) => {
+  const [createEvent, { isLoading: isCreating }] = useCreateEventMutation();
+  const [updateEvent, { isLoading: isUpdating }] = useUpdateMutation();
+  const { data: eventData, isLoading: isLoadingEvent } = useGetByIdQuery(eventId!, {
+    skip: !eventId,
+  });
   const [image, setImage] = useState<File | null>(null);
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
   const [title, setTitle] = useState('');
@@ -20,12 +25,19 @@ export const EventForm: FC<Props> = ({ onClouse }) => {
   const [eventDate, setEventDate] = useState<Date | null>(null);
 
   useEffect(() => {
+    if (eventData && eventId) {
+      setTitle(eventData.title);
+      setDescription(eventData.description || '');
+      setEventDate(eventData.eventDate ? new Date(eventData.eventDate) : null);
+    }
+  }, [eventData, eventId]);
+
+  useEffect(() => {
     const timer = setTimeout(() => {
       const form = document.querySelector(`.${styles.form}`);
       if (form) form.classList.add(`${styles.visible}`);
-    }, 100); // Небольшая задержка для синхронизации
-
-    return () => clearTimeout(timer); // Очистка таймера
+    }, 100);
+    return () => clearTimeout(timer);
   }, []);
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,21 +53,18 @@ export const EventForm: FC<Props> = ({ onClouse }) => {
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     const formData = new FormData();
     formData.append('title', title);
-    formData.append('description', description);
-    if (eventDate) {
-      formData.append('eventDate', eventDate.toISOString());
-    }
-    if (image) {
-      formData.append('image', image);
-    }
+    if (description) formData.append('description', description);
+    if (eventDate) formData.append('eventDate', eventDate.toISOString());
+    if (image) formData.append('image', image);
 
     try {
       await createEvent(formData).unwrap();
       onClouse();
     } catch (error) {
-      console.error('Failed to create event:', error);
+      console.error(`Failed to ${eventId ? 'update' : 'create'} event:`, error);
     }
   };
 
@@ -76,6 +85,7 @@ export const EventForm: FC<Props> = ({ onClouse }) => {
           />
         </div>
       )}
+
       <form className={`${styles.form}`} onSubmit={onSubmit}>
         <div className={styles.form__block}>
           <Input
@@ -84,7 +94,7 @@ export const EventForm: FC<Props> = ({ onClouse }) => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <DatePickerComponent name="date" value={eventDate} onChange={handleDateChange} />
+          <CustomDatePicker name="date" value={eventDate} onChange={handleDateChange} />
           <TextArea
             label="Event Description"
             name="description"
@@ -95,14 +105,14 @@ export const EventForm: FC<Props> = ({ onClouse }) => {
           <Input
             labelText="Share"
             name="share"
-            value="http://siteurl/shorten_url"
+            value={eventData?.publicUrl || 'http://siteurl/shorten_url'}
             disabled
             className={styles.input}
             rightIcon={<CopyLink />}
           />
           <div className={styles.form__header}>
-            <Button type="submit" disabled={isLoading}>
-              {isLoading ? 'Saving...' : 'Save'}
+            <Button type="submit" disabled={isCreating || isUpdating || isLoadingEvent}>
+              {isCreating || isUpdating ? 'Saving...' : 'Save'}
             </Button>
             <Button variant="primary" className={styles.button__cancel} onClick={onClouse}>
               Cancel
@@ -115,7 +125,9 @@ export const EventForm: FC<Props> = ({ onClouse }) => {
             style={
               image
                 ? { backgroundImage: `url(${URL.createObjectURL(image)})` }
-                : { background: '#c4c4c4' }
+                : eventData?.imagePath
+                  ? { backgroundImage: `url(${eventData.imagePath})` }
+                  : { background: '#c4c4c4' }
             }
           ></div>
           <label className={styles.button}>
@@ -125,7 +137,6 @@ export const EventForm: FC<Props> = ({ onClouse }) => {
               className={styles.fileInput}
               onChange={handleImageChange}
             />
-            <OnLoadImg />
           </label>
           <div className={styles.form__delete} onClick={() => setIsDeletePopupOpen(true)}>
             <DeleteOutletIcon />

@@ -1,4 +1,4 @@
-import { Button, Checkbox, Input, Logo } from '@/shared/component';
+import { Button, Checkbox, Input, Loader, Logo } from '@/shared/component';
 
 import { GoogleIcon, TwitterIcon, FacebookIcon } from '@/shared/icons/index';
 import { MediaTab } from '@/widgets';
@@ -14,7 +14,7 @@ import styles from './registerForm.module.scss';
 import { useRegisterMutation } from '../api/register.api';
 
 export function RegisterForm() {
-  const [registerUser] = useRegisterMutation();
+  const [registerUser, { isLoading }] = useRegisterMutation();
   const {
     register,
     handleSubmit,
@@ -32,9 +32,7 @@ export function RegisterForm() {
         name: data.name,
         email: data.email,
         password: data.password,
-      })
-        .unwrap()
-        .then(console.log);
+      }).unwrap();
 
       navigate('/main');
     } catch (err) {
@@ -44,6 +42,11 @@ export function RegisterForm() {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      {isLoading ? (
+        <div className={styles.loaderContainer}>
+          <Loader />
+        </div>
+      ) : null}
       <Logo />
       <h3 className={styles.form__title}>Join to us</h3>
       <p className={styles.form__link}>

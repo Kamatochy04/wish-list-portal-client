@@ -6,7 +6,7 @@ type ResponseRegisterData = {
     id: number;
     email: string;
     name: string;
-  } | null;
+  };
   token: string;
 };
 

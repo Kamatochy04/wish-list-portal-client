@@ -1,3 +1,4 @@
+// gift.module.scss
 .form {
   position: relative;
   width: 100%;
@@ -9,12 +10,25 @@
   padding: 32px;
   border-radius: 16px;
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.25);
+
+  @media (max-width: 1024px) {
+    gap: 30px;
+    padding: 20px;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 20px;
+    padding: 15px;
+  }
+
   &__block {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 14px;
   }
+
   &__delete {
     position: absolute;
     bottom: 31px;
@@ -28,37 +42,81 @@
     color: #000;
     transition: all 0.3s;
     cursor: pointer;
+
+    @media (max-width: 768px) {
+      position: relative;
+      bottom: auto;
+      right: auto;
+      margin-top: 10px;
+    }
+
     &:hover {
       transform: scale(1.1);
     }
   }
+
   &__footer {
     display: flex;
     align-items: center;
     gap: 20px;
+
+    @media (max-width: 480px) {
+      flex-direction: column;
+      gap: 10px;
+    }
   }
+
   &__header {
     display: flex;
     align-items: center;
     gap: 17px;
     margin-top: 40px;
+
     button {
       height: 100%;
       width: 100%;
       height: 50px;
       border-radius: 10px;
-
       font-weight: 600;
       font-size: 20px;
       text-align: center;
       color: #000;
+
+      @media (max-width: 480px) {
+        font-size: 16px;
+        height: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
     }
   }
+
   &__img {
     &_block {
       width: 299px;
       height: 251px;
       background: #c4c4c4;
+      border-radius: 8px;
+      background-size: cover;
+      background-position: center;
+
+      @media (max-width: 1024px) {
+        width: 250px;
+        height: 200px;
+      }
+
+      @media (max-width: 768px) {
+        width: 100%;
+        height: 150px;
+      }
+
+      @media (max-width: 480px) {
+        height: 120px;
+      }
     }
   }
 }
@@ -79,6 +137,16 @@
   display: flex;
   gap: 16px;
   margin-left: auto;
+
+  @media (max-width: 1024px) {
+    font-size: 18px;
+    padding: 6px 15px;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-left: 0;
+  }
 }
 
 .form__img {
@@ -86,7 +154,13 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+
+  @media (max-width: 768px) {
+    flex: 0 0 auto;
+    width: 100%;
+  }
 }
+
 .modal {
   position: fixed;
   top: 0;
@@ -102,6 +176,10 @@
 
   &.active {
     opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    padding: 10px;
   }
 }
 
@@ -120,16 +198,12 @@
   font-size: 20px;
   text-align: center;
   color: #000;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   border-radius: 15px;
   height: 44px;
-
   background: #c4c4c4;
-
   transition: all 0.3s ease;
 
   &:hover {
@@ -137,9 +211,16 @@
     transform: scale(1.05);
   }
 
-  /* Текст Browse image */
   &::before {
     content: 'Browse image';
+  }
+
+  @media (max-width: 1024px) {
+    font-size: 18px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 16px;
   }
 }
 
@@ -150,42 +231,9 @@
 .textAreat {
   textarea {
     min-height: 120px;
-  }
-}
 
-@media (max-width: 768px) {
-  .form__img {
-    flex: 0 0 auto;
-    width: 100%;
-  }
-
-  .form__img_block {
-    height: 150px;
-  }
-
-  .button {
-    padding: 8px 12px;
-    font-size: 0.9rem;
-
-    svg {
-      width: 18px;
-      height: 18px;
-    }
-  }
-}
-
-@media (max-width: 480px) {
-  .form__img_block {
-    height: 120px;
-  }
-
-  .button {
-    padding: 6px 10px;
-    font-size: 0.85rem;
-
-    svg {
-      width: 16px;
-      height: 16px;
+    @media (max-width: 480px) {
+      min-height: 100px;
     }
   }
 }

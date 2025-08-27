@@ -19,4 +19,4 @@ export { SendIcon } from './SendIcon';
 
 export { GiftIcon } from './gift/GiftIcon';
 
-export { OnLoadImg } from './onLoadImg';
+// export { OnLoadImg } from './onLoadImg';

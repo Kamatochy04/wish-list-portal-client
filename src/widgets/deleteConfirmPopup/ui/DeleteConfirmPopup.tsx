@@ -13,14 +13,15 @@ export const DeletePopup: FC<Props> = ({ eventTitle, giftTitle, onClouse, onClou
   return (
     <div className={styles.container}>
       <p className={styles.container__text}>
-        Are you sure that you want to delete that event/gift {eventTitle}/{giftTitle} ?
+        Are you sure you want to delete{' '}
+        {eventTitle ? `event "${eventTitle}"` : `gift "${giftTitle}"`}?
       </p>
 
       <div className={styles.buttons}>
-        <Button className={styles.button} onClick={() => onClouse()}>
+        <Button className={styles.button} onClick={onClouse}>
           Yes
         </Button>
-        <Button variant="primary" className={styles.button} onClick={() => onClousePopup()}>
+        <Button variant="primary" className={styles.button} onClick={onClousePopup}>
           No
         </Button>
       </div>

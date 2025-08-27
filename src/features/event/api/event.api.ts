@@ -29,14 +29,39 @@ export const eventApi = api.injectEndpoints({
         method: 'GET',
       }),
     }),
-    create: builder.mutation<Event, FormData>({
+    getById: builder.query<Event, number>({
+      query: (id) => ({
+        url: `/events/${id}`,
+        method: 'GET',
+      }),
+    }),
+    createEvent: builder.mutation<Event, FormData>({
       query: (formData) => ({
         url: '/events',
         method: 'POST',
         body: formData,
       }),
     }),
+    update: builder.mutation<Event, { id: number; formData: FormData }>({
+      query: ({ id, formData }) => ({
+        url: `/events/${id}`,
+        method: 'PUT',
+        body: formData,
+      }),
+    }),
+    delete: builder.mutation<void, number>({
+      query: (id) => ({
+        url: `/events/${id}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 });
 
-export const { useCreateMutation, useGetQuery } = eventApi;
+export const {
+  useGetQuery,
+  useGetByIdQuery,
+  useCreateEventMutation,
+  useUpdateMutation,
+  useDeleteMutation,
+} = eventApi;

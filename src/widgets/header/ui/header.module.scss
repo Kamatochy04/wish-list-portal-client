@@ -3,6 +3,7 @@
   background: #fff;
   padding: 10px 0;
   position: relative;
+
   transition: background 0.3s ease;
 
   &__container {
@@ -24,6 +25,23 @@
     align-items: flex-start;
     gap: 30px;
   }
+  div {
+    cursor: pointer;
+    transition: all 0.5;
+
+    &:hover {
+      transform: scale(1.05);
+      color: red;
+    }
+  }
+  p {
+    cursor: pointer;
+    transition: all 0.5;
+    &:hover {
+      transform: scale(1.05);
+      color: red;
+    }
+  }
 }
 
 .non_auth__container {
@@ -35,7 +53,7 @@
   gap: 5px;
 
   div {
-    transition: all 0.4s;
+    transition: all 0.4s ease;
     cursor: pointer;
     &:hover {
       color: var(--main-color);
@@ -71,7 +89,6 @@
   font-weight: 700;
   font-size: 18px;
   color: #000;
-
   display: flex;
   align-items: center;
   gap: 20px;
@@ -85,9 +102,10 @@
   .logout {
     text-decoration: underline;
     text-decoration-skip-ink: none;
-    transition: color 0.3s ease;
     &:hover {
-      color: var(--accent-color);
+      transform: scale(1.05);
+
+      color: red;
     }
   }
 
@@ -99,8 +117,10 @@
     background: #fff;
     position: fixed;
     top: 0;
+    z-index: 1000;
     left: -250px;
     height: 100vh;
+    position: fixed;
     width: 250px;
     box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
     transition:

@@ -1,30 +1,35 @@
 .page {
-  background-image: url('../../../shared/img/StartPageBg.png');
-  padding: 63px 0 0 0;
-  background-repeat: no-repeat;
   background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  padding: 50px 0;
+  image-rendering: optimizeSpeed;
+
+  &__bg {
+    display: none;
+  }
 
   &__container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 15px;
+    padding: 0 10px;
   }
 }
 
 .block {
   background: #fff;
-  padding: 13px 30px 57px 30px;
+  padding: 10px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 27px;
+  gap: 15px;
   width: 100%;
-  border-radius: 10px;
+  border-radius: 8px;
 
   &__title {
     font-weight: 700;
-    font-size: 20px;
+    font-size: 18px;
     color: #000;
     text-align: center;
   }
@@ -32,20 +37,18 @@
   &__container {
     width: 100%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
 
-    @media (min-width: 768px) {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: flex-start;
+    @media (max-width: 859px) {
+      justify-content: center;
     }
   }
 }
 
 .inf_block {
-  max-width: 230px;
+  max-width: 220px;
   width: 100%;
   text-align: center;
 
@@ -57,7 +60,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 
     @media (min-width: 768px) {
       flex-direction: row;
@@ -67,44 +70,44 @@
 
   &__text {
     font-weight: 700;
-    font-size: 18px;
+    font-size: 16px;
     color: #000;
 
     @media (min-width: 768px) {
-      font-size: 20px;
+      font-size: 18px;
     }
   }
 
   &__descr {
-    margin-top: 15px;
+    margin-top: 8px;
     font-weight: 400;
     font-size: 14px;
     color: #7b7b80;
 
     @media (min-width: 768px) {
-      font-size: 16px;
+      font-size: 15px;
     }
   }
 }
 
 .button {
-  padding: 15px 30px;
+  padding: 12px 25px;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 16px;
   color: #fff;
-  border-radius: 6px;
-  margin-top: 20px;
+  border-radius: 5px;
+  margin-top: 15px;
   width: 100%;
-  max-width: 300px;
+  max-width: 280px;
 
   @media (min-width: 768px) {
-    padding: 22px 40px;
-    font-size: 24px;
+    padding: 15px 30px;
+    font-size: 20px;
   }
 }
 
-.carusel {
-  margin-top: 30px;
+.carousel {
+  margin-top: 15px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -112,59 +115,50 @@
 
   &__title {
     font-weight: 700;
-    font-size: 24px;
+    font-size: 22px;
     color: #000;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 
     @media (min-width: 768px) {
-      font-size: 36px;
+      font-size: 30px;
     }
   }
 
   &__container {
-    display: flex;
-    align-items: center;
     width: 100%;
-    position: relative;
-  }
-
-  &__items {
-    display: flex;
-    gap: 15px;
-    width: 100%;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding: 10px 0;
-
-    @media (min-width: 768px) {
-      justify-content: center;
-      overflow-x: hidden;
-    }
-  }
-
-  &__arrow {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    z-index: 1;
-    display: none;
-
-    @media (min-width: 768px) {
-      display: block;
-      position: static;
-      margin: 0 10px;
-    }
-
-    &:hover {
-      opacity: 0.7;
-    }
   }
 }
 
-// Hide scrollbar for carousel on mobile
+.splide {
+  padding: 8px 0;
+
+  &__track {
+    overflow: hidden;
+  }
+
+  &__list {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__slide {
+    display: flex;
+    justify-content: center;
+    width: 240px;
+    max-width: 100%;
+  }
+
+  &__arrow {
+    display: none;
+  }
+
+  &__pagination {
+    display: none;
+  }
+}
+
 @media (max-width: 767px) {
-  .carusel__items {
+  .splide__track {
     -ms-overflow-style: none;
     scrollbar-width: none;
 
@@ -172,4 +166,26 @@
       display: none;
     }
   }
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+}
+
+.gift-card {
+  width: 240px;
+  height: auto;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.gift-card__image {
+  width: 100%;
+  height: 140px;
+  background-size: cover;
+  background-position: center;
 }

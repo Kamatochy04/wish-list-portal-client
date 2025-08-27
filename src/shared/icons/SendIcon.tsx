@@ -1,6 +1,11 @@
-export const SendIcon = () => {
+type Props = {
+  onClick: () => void;
+};
+
+export const SendIcon = ({ onClick }: Props) => {
   return (
     <svg
+      onClick={onClick}
       width="30"
       height="30"
       viewBox="0 0 30 30"

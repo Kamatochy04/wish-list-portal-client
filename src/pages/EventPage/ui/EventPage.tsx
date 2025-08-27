@@ -1,3 +1,4 @@
+// src/components/EventPage.tsx
 import { GiftCard } from '@/widgets';
 import styles from './eventpage.module.scss';
 import { ListBlockIcon, ListLineIcon } from '@/shared/icons';
@@ -5,13 +6,17 @@ import { useEffect, useState } from 'react';
 import useAos from '@/shared/hooks/AOS';
 import { useParams } from 'react-router-dom';
 import { useGetOneQuery } from '../api/getEvent.api';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/app/store/store';
+import { NoGiftsComponent } from '@/shared/component';
 
 export default function EventPage() {
   useAos();
   const { eventID } = useParams<{ eventID: string }>();
-  const [showVariant, setShowVariant] = useState<'block' | 'container'>('block');
+  const [showVariant, setShowVariant] = useState<'block' | 'container'>('container');
 
   const { data: event, isLoading, isError } = useGetOneQuery(Number(eventID));
+  const { gifts } = useSelector((state: RootState) => state.gifts);
 
   useEffect(() => {
     console.log(event);
@@ -65,22 +70,32 @@ export default function EventPage() {
             </div>
           </div>
         </div>
-        <div className={`${styles[showVariant]} ${styles.gitfContainer}`}>
-          {event.gifts.length === 0 ? (
-            <h2>Gifts not found</h2>
-          ) : (
-            event.gifts.map((gift, index) => (
+        {gifts.length === 0 ? (
+          <NoGiftsComponent />
+        ) : (
+          <div className={`${styles[showVariant]} ${styles.gitfContainer}`}>
+            {gifts.map((gift, index) => (
               <div
                 key={gift.id}
                 data-aos="fade-up"
                 data-aos-delay={100 * index}
                 data-aos-duration="600"
               >
-                <GiftCard variant={showVariant} />
+                <GiftCard
+                  variant={showVariant}
+                  key={gift.id}
+                  id={gift.id}
+                  name={gift.name}
+                  description={gift.description}
+                  imagePath={gift.imagePath}
+                  price={gift.price}
+                  currency={gift.currency}
+                  externalLink={gift.externalLink}
+                />
               </div>
-            ))
-          )}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

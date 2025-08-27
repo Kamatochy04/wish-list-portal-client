@@ -1,13 +1,17 @@
-import { Logo } from '@/shared/component';
+import { Logo, LogoutModal } from '@/shared/component';
 import styles from './header.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { UserIcon } from '@/shared/icons/UserIcon';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/app/store/store';
 
 export function Header() {
   const navigate = useNavigate();
   const [isAuth, setIsAuth] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const user = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
@@ -19,6 +23,12 @@ export function Header() {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsAuth(false);
+    setIsModalOpen(false);
   };
 
   return (
@@ -35,13 +45,15 @@ export function Header() {
             <aside
               className={`${styles.auth__container} ${isMenuOpen ? styles.auth__container_open : ''}`}
             >
-              <div className={styles.auth__content} onClick={() => navigate('/accaunt-info')}>
-                <p>Settings</p>
-                <div className={styles.userName}>
+              <div className={styles.auth__content}>
+                <p onClick={() => navigate('/accaunt-info')}>Settings</p>
+                <div className={styles.userName} onClick={() => navigate('/main')}>
                   <UserIcon />
-                  <p>User name</p>
+                  <p>{user.name}</p>
                 </div>
-                <p className={styles.logout}>Logout</p>
+                <p className={styles.logout} onClick={() => setIsModalOpen(true)}>
+                  Logout
+                </p>
               </div>
             </aside>
           ) : (
@@ -56,6 +68,11 @@ export function Header() {
           )}
         </div>
       </div>
+      <LogoutModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onConfirm={handleLogout}
+      />
     </header>
   );
 }
