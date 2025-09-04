@@ -2,11 +2,11 @@ import { Button, Input, Logo } from '@/shared/component';
 import { GoogleIcon, TwitterIcon, FacebookIcon } from '@/shared/icons/index';
 import { MediaTab } from '@/widgets';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { defaultFormValues, IRegisterForm } from '../types/loginForm';
+import { IRegisterForm } from '../schema/loginSchema';
 import styles from './loginForm.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { loginSchema } from '../schema/loignShame';
+import { loginSchema } from '../schema/loginSchema';
 import { useLoginMutation } from '../api/login.api';
 import { setCredentials } from '@/features/user/slice/userSlice';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -15,22 +15,26 @@ export function LoginForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     setError,
   } = useForm<IRegisterForm>({
-    defaultValues: defaultFormValues,
+    defaultValues: { email: '', password: '', terms: false },
     resolver: zodResolver(loginSchema),
   });
 
-  const [login, { isLoading }] = useLoginMutation();
-
+  const [login] = useLoginMutation();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<IRegisterForm> = async (data) => {
     try {
-      login({ email: data.email, password: data.password })
+      await login({ email: data.email, password: data.password })
         .unwrap()
-        .then(() => navigate('/main'));
+        .then((response) => {
+          localStorage.setItem('token', response.token);
+          dispatch(setCredentials(response.user));
+          navigate('/main');
+        });
     } catch (error: any) {
       setError('root', {
         type: 'manual',
@@ -75,10 +79,22 @@ export function LoginForm() {
           erroText={errors.password?.message}
           type="password"
         />
+        <div className={styles.form__terms}>
+          <input
+            type="checkbox"
+            id="terms"
+            {...register('terms')}
+            className={styles.form__checkbox}
+          />
+          <label htmlFor="terms" className={styles.form__label}>
+            I agree to the terms and conditions
+          </label>
+          {errors.terms && <p className={styles.form__error}>{errors.terms.message}</p>}
+        </div>
       </div>
 
-      <Button className={styles.button} disabled={isLoading} type="submit">
-        Sign In
+      <Button className={styles.button} disabled={isSubmitting} type="submit">
+        {isSubmitting ? 'Loading...' : 'Sign In'}
       </Button>
     </form>
   );

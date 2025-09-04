@@ -1,4 +1,3 @@
-// src/components/EventForm.tsx
 import { Button, CustomDatePicker, Input, TextArea } from '@/shared/component';
 import styles from './event.module.scss';
 import { useState, ChangeEvent, FormEvent, FC, useEffect } from 'react';
@@ -61,7 +60,11 @@ export const EventForm: FC<Props> = ({ onClouse, eventId }) => {
     if (image) formData.append('image', image);
 
     try {
-      await createEvent(formData).unwrap();
+      if (eventId) {
+        await updateEvent({ id: eventId, formData }).unwrap();
+      } else {
+        await createEvent(formData).unwrap();
+      }
       onClouse();
     } catch (error) {
       console.error(`Failed to ${eventId ? 'update' : 'create'} event:`, error);
@@ -112,7 +115,7 @@ export const EventForm: FC<Props> = ({ onClouse, eventId }) => {
           />
           <div className={styles.form__header}>
             <Button type="submit" disabled={isCreating || isUpdating || isLoadingEvent}>
-              {isCreating || isUpdating ? 'Saving...' : 'Save'}
+              {isCreating || isUpdating || isLoadingEvent ? 'Loading...' : 'Save'}
             </Button>
             <Button variant="primary" className={styles.button__cancel} onClick={onClouse}>
               Cancel

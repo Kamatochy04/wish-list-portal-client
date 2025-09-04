@@ -1,6 +1,5 @@
 import { Button, DropDown, Input, TextArea } from '@/shared/component';
 import styles from './gift.module.scss';
-// import { OnLoadImg } from '@/shared/icons';
 import { useState, ChangeEvent, FormEvent, FC, useEffect } from 'react';
 import { DeleteOutletIcon } from '@/shared/icons/DeleteoutletIcon';
 import { DeletePopup } from '@/widgets';
@@ -61,7 +60,7 @@ export const GiftForm: FC<Props> = ({ onClouse, giftId }) => {
 
     try {
       if (giftId) {
-        updateGiftMutation({ id: giftId, formData }).unwrap();
+        await updateGiftMutation({ id: giftId, formData }).unwrap();
       } else {
         await createGift(formData).unwrap();
       }
@@ -132,7 +131,7 @@ export const GiftForm: FC<Props> = ({ onClouse, giftId }) => {
 
           <div className={styles.form__header}>
             <Button type="submit" disabled={isCreating || isUpdating || isLoadingGift}>
-              {isCreating || isUpdating ? 'Saving...' : 'Save'}
+              {isCreating || isUpdating || isLoadingGift ? 'Loading...' : 'Save'}
             </Button>
             <Button variant="primary" className={styles.button__cancel} onClick={onClouse}>
               Cancel
@@ -157,7 +156,6 @@ export const GiftForm: FC<Props> = ({ onClouse, giftId }) => {
               className={styles.fileInput}
               onChange={handleImageChange}
             />
-            {/* <OnLoadImg /> */}
           </label>
           <div className={styles.form__delete} onClick={() => setIsDeletePopupOpen(true)}>
             <DeleteOutletIcon />

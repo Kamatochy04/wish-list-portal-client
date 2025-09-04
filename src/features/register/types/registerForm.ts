@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { registerSchema } from '../schema/registerShame';
+import { registerSchema } from '../schema/registerSchema';
 
 export type IRegisterForm = z.infer<typeof registerSchema>;
 

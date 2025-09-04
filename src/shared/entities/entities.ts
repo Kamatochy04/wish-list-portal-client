@@ -12,6 +12,7 @@ export interface User {
   currency: Currency;
   createdAt: Date;
   updatedAt: Date;
+  token: string;
 }
 
 export interface Event {
