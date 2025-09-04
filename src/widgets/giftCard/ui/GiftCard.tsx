@@ -1,5 +1,5 @@
 // src/components/GiftCard.tsx
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import styles from './giftCard.module.scss';
 import { DeleteIcon, EditIcon } from '@/shared/icons';
 import { useDeleteMutation } from '@/features/gift/api/gift.api';
@@ -63,7 +63,10 @@ export const GiftCard: FC<GiftCardProps> = ({
     if (onDelete) onDelete(id, name);
   };
 
-  const convertedPrice = price ? convertCurrency(price, currency, userCurrency) : undefined;
+  const convertedPrice = useMemo(
+    () => (price ? convertCurrency(price, currency, userCurrency) : undefined),
+    [price, currency, userCurrency],
+  );
 
   return (
     <AnimatePresence>

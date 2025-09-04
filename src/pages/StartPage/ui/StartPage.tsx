@@ -1,4 +1,3 @@
-import { useState, useEffect, useRef } from 'react';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/css/core';
 import styles from './startPage.module.scss';
@@ -7,63 +6,14 @@ import { CreateWishlistIcon, ReceiveGiftsIcon, ShareWishlistIcon } from '@/share
 import { MostPopularGiftItem } from '@/widgets';
 import useAos from '@/shared/hooks/AOS';
 import { useNavigate } from 'react-router-dom';
-
-interface Gift {
-  id: number;
-  name: string;
-  eventId: number | null;
-  description: string | null;
-  imagePath: string | null;
-  price: number | null;
-  currency: 'USD' | 'BYN' | 'RUB' | null;
-  externalLink: string | null;
-  isReserved: boolean;
-  likes: number;
-  createdAt: string;
-  updatedAt: string;
-}
+import { useRef } from 'react';
+import { useGetQuery } from '../api/popularGift.api';
 
 export default function StartPage() {
   useAos();
-  const [giftItems, setGiftItems] = useState<Gift[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const splideRef = useRef<Splide | null>(null);
-
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const controller = new AbortController();
-    const fetchPopularGifts = async () => {
-      try {
-        setIsLoading(true);
-        const response = await fetch('http://localhost:3000/gifts/popular', {
-          signal: controller.signal,
-          headers: {
-            Accept: 'application/json',
-            'Accept-Encoding': 'gzip, deflate, br',
-            'Cache-Control': 'max-age=3600',
-          },
-        });
-        if (!response.ok) {
-          throw new Error('Failed to load popular gifts');
-        }
-        const data: Gift[] = await response.json();
-        setGiftItems(data.slice(0, 8));
-        setError(null);
-      } catch (err) {
-        if (err.name !== 'AbortError') {
-          setError((err as Error).message);
-        }
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchPopularGifts();
-
-    return () => controller.abort();
-  }, []);
+  const splideRef = useRef<Splide | null>(null);
+  const { data: giftItems = [], isLoading, error } = useGetQuery();
 
   return (
     <section className={styles.page}>
@@ -138,7 +88,9 @@ export default function StartPage() {
             {isLoading ? (
               <p>Loading...</p>
             ) : error ? (
-              <p className={styles.error}>Error: {error}</p>
+              <p className={styles.error}>
+                Error: {error.message || 'Failed to load popular gifts'}
+              </p>
             ) : giftItems.length === 0 ? (
               <p>No gifts available</p>
             ) : (

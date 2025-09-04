@@ -9,6 +9,7 @@ export type UserAccauntInfo = {
   email: string;
   currency: Currency;
   password: string;
+  token: string;
 };
 
 const initialState: User = {
@@ -19,6 +20,7 @@ const initialState: User = {
   currency: Currency.USD,
   createdAt: new Date(),
   updatedAt: new Date(),
+  token: '',
 };
 
 const userSlice = createSlice({
@@ -36,6 +38,7 @@ const userSlice = createSlice({
       state.email = action.payload.email ?? state.email;
       state.name = action.payload.name ?? state.name;
       state.currency = action.payload.currency ?? state.currency;
+      state.token = action.payload.token ?? state.token;
     },
   },
   extraReducers: (builder) => {

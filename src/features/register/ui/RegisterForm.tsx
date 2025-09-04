@@ -1,15 +1,11 @@
 import { Button, Checkbox, Input, Loader, Logo } from '@/shared/component';
-
 import { GoogleIcon, TwitterIcon, FacebookIcon } from '@/shared/icons/index';
 import { MediaTab } from '@/widgets';
-
 import { useForm, SubmitHandler } from 'react-hook-form';
-
 import { defaultFormValues, IRegisterForm } from '../types/registerForm';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { registerSchema } from '../schema/registerShame';
+import { registerSchema } from '../schema/registerSchema';
 import { useNavigate } from 'react-router-dom';
-
 import styles from './registerForm.module.scss';
 import { useRegisterMutation } from '../api/register.api';
 
@@ -18,7 +14,7 @@ export function RegisterForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<IRegisterForm>({
     defaultValues: defaultFormValues,
     resolver: zodResolver(registerSchema),
@@ -94,8 +90,8 @@ export function RegisterForm() {
         </span>
       </div>
 
-      <Button className={styles.button} type="submit">
-        Register
+      <Button className={styles.button} disabled={isSubmitting} type="submit">
+        {isSubmitting ? 'Loading...' : 'Register'}
       </Button>
     </form>
   );
